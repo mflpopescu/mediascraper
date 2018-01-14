@@ -8,7 +8,8 @@ Run Spider
 ```scrapy crawl hotsnews```
 
 Put elastic index template below using Kibana Dev Tools or curl request to _template endpoint
-```PUT _template/hotnews
+```
+PUT _template/hotnews
 {
     "order": 0,
     "template": "hotnews*",
@@ -36,7 +37,8 @@ Put elastic index template below using Kibana Dev Tools or curl request to _temp
       }
     },
     "aliases": {}
-  }```
+  }
+```
 
 Create an index pattern if you want to visualize your data in Kibana
 https://user-images.githubusercontent.com/22353083/34921394-c8cafd28-f981-11e7-8f3c-63887a6ff37b.png
