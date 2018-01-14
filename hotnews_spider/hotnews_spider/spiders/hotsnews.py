@@ -23,10 +23,15 @@ class HotsnewsSpider(XMLFeedSpider):
         artTitle = node.xpath('title/text()').extract()
         artLink = node.xpath('link/text()').extract()
         artDescription = node.xpath('description/text()').extract()
-        artPubDate = node.xpath('pubDate/text()').extract()
+        artPubDate = node.xpath('pubDate/text()').extract_first()
+        # time format from "Sat, 23 Dec 2017 16:01:00 GMT" to "3 Dec 2017 16:01:00"
+        artPubDate = artPubDate.split(',')[1:]
+        artPubDate = ''.join(artPubDate)
+        artPubDate = artPubDate.strip()
+        artPubDate = artPubDate[:-4]
         yield {
             'artTitle': artTitle,
             'artLink': artLink,
             'artDescription': artDescription,
-            'pubDate': artPubDate
+            'artPubDate': artPubDate
             }
