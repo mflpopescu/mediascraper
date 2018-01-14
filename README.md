@@ -41,7 +41,6 @@ PUT _template/hotnews
 ```
 
 Create an index pattern if you want to visualize your data in Kibana
-https://user-images.githubusercontent.com/22353083/34921394-c8cafd28-f981-11e7-8f3c-63887a6ff37b.png
 ![index_pattern](https://user-images.githubusercontent.com/22353083/34921394-c8cafd28-f981-11e7-8f3c-63887a6ff37b.png)
 
 View documents in Kibana
