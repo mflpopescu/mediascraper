@@ -1,0 +1,19 @@
+# -*- coding: utf-8 -*-
+import scrapy
+
+class HotsnewsSpider(scrapy.Spider):
+    name = 'hotsnews'
+    allowed_domains = ['hotnews.ro']
+    start_urls = ['http://hotnews.ro/']
+
+    def parse(self, response):
+        articles = response.xpath('//*[@class="articol_lead_full"]')
+        for article in articles:
+            artTitle = article.xpath('.//*[@class="article_title"]/a/@title').extract_first()
+            artText = article.xpath('.//*[@class="lead"]/text()').extract_first()
+            artLink = article.xpath('.//*[@class="article_title"]/a/@href').extract_first()
+            print '\n'
+	    print artTitle
+	    print artText
+	    print artLink
+	    print '\n'

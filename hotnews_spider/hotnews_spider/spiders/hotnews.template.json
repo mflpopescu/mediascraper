@@ -1,0 +1,22 @@
+PUT _template/hotnews
+{
+  "template": "hotnews*",
+  "mappings": {
+    "type1": {
+        "_source": {
+          "enabled": false
+        },
+    "properties": {
+        "artTitle": {
+          "type": "keyword"
+        },
+        "artFullText": {
+          "type": "keyword"
+        },
+        "artDate": {
+          "type": "date",
+          "format": "yyyy-MM-dd'T'HH:mm:ss"
+        }
+      }
+    }
+}}

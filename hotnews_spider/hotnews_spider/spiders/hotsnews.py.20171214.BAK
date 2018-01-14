@@ -1,0 +1,47 @@
+# -*- coding: utf-8 -*-
+from scrapy import Spider
+from scrapy.http import Request
+from time import gmtime, strftime, sleep
+import random
+import datetime
+from time import sleep
+import random
+
+import locale
+locale.setlocale(locale.LC_ALL, 'ro_RO')
+
+from elasticsearch import Elasticsearch
+from elasticsearch import helpers
+
+class HotsnewsSpider(Spider):
+    name = 'hotsnews'
+    allowed_domains = ['hotnews.ro']
+    start_urls = ['http://hotnews.ro/']
+
+    def parse(self, response):
+        articles = response.xpath('//*[@class="articol_lead_full"]')
+        for article in articles:
+            sleep(random.randrange(1, 3))
+            artLink = article.xpath('.//*[@class="article_title"]/a/@href').extract_first()
+            yield Request(artLink, callback=self.parse_article)
+
+    def parse_article(self,response):
+        artDate = response.xpath('.//*[@class="data"]/text()').extract_first()
+#        artDate=artDate.encode('utf8')
+        artDate = artDate.split(',')[1:]
+        artDate = ''.join(artDate)
+        artDate = artDate.strip()
+        artDate = datetime.datetime.strptime(artDate, '%d %B %Y %H:%M')
+
+        artTitle = response.xpath('.//h1[@class="title"]/text()').extract()
+        artFullText= response.xpath('.//div[@id="articleContent"]//text()').extract()
+        curLink = response.request.url
+
+        yield {
+            'artDate': artDate,
+            'artTitle': artTitle,
+            'artFullText': artFullText,
+            'curLink': curLink
+        }
+
+

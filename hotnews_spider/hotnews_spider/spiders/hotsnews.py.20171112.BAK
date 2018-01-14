@@ -1,0 +1,50 @@
+# -*- coding: utf-8 -*-
+import scrapy
+from time import gmtime, strftime
+
+from elasticsearch import Elasticsearch
+from elasticsearch import helpers
+
+class HotsnewsSpider(scrapy.Spider):
+    name = 'hotsnews'
+    allowed_domains = ['hotnews.ro']
+    start_urls = ['http://hotnews.ro/']
+
+    def parse(self, response):
+        articles = response.xpath('//*[@class="articol_lead_full"]')
+        idx_time=strftime("%Y-%m-%d %H:%M:%S", gmtime())
+        # '2009-01-05 22:14:39'
+        for article in articles:
+            artTitle = article.xpath('.//*[@class="article_title"]/a/@title').extract_first()
+            artText = article.xpath('.//*[@class="lead"]/text()').extract_first()
+            artLink = article.xpath('.//*[@class="article_title"]/a/@href').extract_first()
+
+            es_fields_keys = ('timestamp', 'artTitle', 'artText', 'artLink')
+            es_fields_vals = (idx_time, artTitle, artText, artLink)
+            # We return a dict holding values from each line
+            es_values_d = dict(zip(es_fields_keys, es_fields_vals))
+
+            yield es_values_d
+
+#    def send_to_ES(self):
+#        print ("AM AJUNS AICI")
+#        es = Elasticsearch(hosts=[{'host': 'localhost', 'port': 9201}])
+#
+#        # NOTE the (...) round brackets. This is for a generator.
+#        k = ({
+#            "_index": "hotnews-crawl",
+#            "_type": "hotnews",
+#            "artTitle": artTitle,
+#            "artText": artText,
+#            "artLink": artLink
+#        } for artTitle, artText, artLink in parse())
+#
+#        helpers.bulk(es, k)
+
+#def main():
+#    print ("AM AJUNS AICI")
+#    parse()
+#    send_to_ES()
+#
+#if __name__ == "__main__":
+#    main()
