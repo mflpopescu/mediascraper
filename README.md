@@ -32,34 +32,6 @@ PUT _template/hotnews
           "artPubDate": {
             "type": "date",
             "format": "dd MMM yyyy HH:mm:ss"
-          }
-        }
-      }
-    },
-    "aliases": {}
-  }PUT _template/hotnews
-{
-    "order": 0,
-    "template": "hotnews*",
-    "settings": {},
-    "mappings": {
-      "type1": {
-        "_source": {
-          "enabled": false
-        },
-        "properties": {
-          "artTitle": {
-            "type": "text"
-          },
-          "artLink": {
-            "type": "text"
-          },
-         "artDescription": {
-            "type": "text"
-          },
-          "artPubDate": {
-            "type": "date",
-            "format": "dd MMM yyyy HH:mm:ss"
           },
           "artPolarity": {
             "type": "float",
