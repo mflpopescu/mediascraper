@@ -7,6 +7,7 @@ import datetime
 from time import sleep
 import random
 from scrapy.spiders import XMLFeedSpider
+from textblob import TextBlob
 
 
 from elasticsearch import Elasticsearch
@@ -29,9 +30,16 @@ class HotsnewsSpider(XMLFeedSpider):
         artPubDate = ''.join(artPubDate)
         artPubDate = artPubDate.strip()
         artPubDate = artPubDate[:-4]
+        artDescription = ''.join(artDescription)
+        artDescription_en = TextBlob(artDescription)
+        artDescription_en = artDescription_en.translate(to='en')
+        artDescription_en_polarity = artDescription_en.sentiment.polarity
+        artDescription_en_subjectivity = artDescription_en.sentiment.subjectivity
         yield {
             'artTitle': artTitle,
             'artLink': artLink,
             'artDescription': artDescription,
-            'artPubDate': artPubDate
+            'artPubDate': artPubDate,
+            'artPolarity': artDescription_en_polarity,
+            'artSubjectivity': artDescription_en_subjectivity
             }
