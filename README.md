@@ -1,5 +1,5 @@
 # mediascraper
-Scraper for hotnews.ro RSS using Scrapy framework. Results posted to Elastic
+Project aims to determine sentiment and subjectivity of articles on hotnews.ro using natural language processing. Articles are scraped from RSS feed using Scrapy framework and posted to Elastic.
 
 Activate virtual environment
 ```source bin/activate```
@@ -32,6 +32,42 @@ PUT _template/hotnews
           "artPubDate": {
             "type": "date",
             "format": "dd MMM yyyy HH:mm:ss"
+          }
+        }
+      }
+    },
+    "aliases": {}
+  }PUT _template/hotnews
+{
+    "order": 0,
+    "template": "hotnews*",
+    "settings": {},
+    "mappings": {
+      "type1": {
+        "_source": {
+          "enabled": false
+        },
+        "properties": {
+          "artTitle": {
+            "type": "text"
+          },
+          "artLink": {
+            "type": "text"
+          },
+         "artDescription": {
+            "type": "text"
+          },
+          "artPubDate": {
+            "type": "date",
+            "format": "dd MMM yyyy HH:mm:ss"
+          },
+          "artPolarity": {
+            "type": "float",
+            "coerce": false
+          },
+          "artSubjectivity": {
+            "type": "float",
+            "coerce": false
           }
         }
       }
