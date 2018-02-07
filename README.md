@@ -45,8 +45,7 @@ PUT _template/hotnews
       }
     },
     "aliases": {}
-  }
-```
+  }```
 
 3. Activate virtual environment
 ```source bin/activate```
