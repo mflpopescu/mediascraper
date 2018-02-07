@@ -2,10 +2,12 @@
 Project aims to determine sentiment and subjectivity of articles on hotnews.ro using natural language processing. Articles are scraped from RSS feed using Scrapy framework and posted to Elastic.
 
 1. Install dependencies via pip
+
 ```pip install scrapy
 pip install TextBlob
 pip install elasticsearch
-pip install ScrapyElasticSearch```
+pip install ScrapyElasticSearch
+```
 
 2. Put elastic index template below using Kibana Dev Tools or curl request to _template endpoint
 
