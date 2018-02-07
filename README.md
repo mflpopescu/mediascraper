@@ -63,7 +63,9 @@ scrapy crawl hotsnews
 ```
 
 5. Create an index pattern if you want to visualize your data in Kibana
+
 ![index_pattern](https://user-images.githubusercontent.com/22353083/34921394-c8cafd28-f981-11e7-8f3c-63887a6ff37b.png)
 
 6. View documents in Kibana
+
 ![documents](https://user-images.githubusercontent.com/22353083/34921396-caa7e520-f981-11e7-8ab2-67fd1e558d28.png)
