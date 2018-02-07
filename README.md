@@ -8,6 +8,7 @@ pip install elasticsearch
 pip install ScrapyElasticSearch```
 
 2. Put elastic index template below using Kibana Dev Tools or curl request to _template endpoint
+
 ```
 PUT _template/hotnews
 {
@@ -45,7 +46,8 @@ PUT _template/hotnews
       }
     },
     "aliases": {}
-  }```
+  }
+```
 
 3. Activate virtual environment
 
