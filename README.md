@@ -43,6 +43,9 @@ PUT _template/hotnews
           "artSubjectivity": {
             "type": "float",
             "coerce": false
+          },
+          "artText": {
+            "type": "text"
           }
         }
       }

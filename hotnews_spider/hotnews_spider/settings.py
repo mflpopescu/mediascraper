@@ -93,6 +93,7 @@ ITEM_PIPELINES = {
     'scrapyelasticsearch.scrapyelasticsearch.ElasticSearchPipeline': 500
 }
 
+
 ELASTICSEARCH_SERVERS = ['http://localhost:9201']
 ELASTICSEARCH_INDEX = 'hotnews'
 ELASTICSEARCH_INDEX_DATE_FORMAT = '%Y-%m'
